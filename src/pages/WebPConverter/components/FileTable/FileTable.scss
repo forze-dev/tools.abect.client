@@ -1,0 +1,106 @@
+.FileTable {
+  border: 1px solid var(--border-base);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+
+  &__head {
+    display: grid;
+    grid-template-columns: 44px 1fr 130px 100px 110px 44px;
+    background: var(--bg-sidebar);
+    border-bottom: 1px solid var(--border-base);
+    padding: 0 12px;
+  }
+
+  &__th {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    padding: 10px 6px;
+  }
+
+  &__footer {
+    background: var(--bg-sidebar);
+    border-top: 1px solid var(--border-base);
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  &__stats {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+
+  &__stat {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  &__stat-label {
+    font-size: 0.6875rem;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  &__stat-value {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+
+    &--green { color: var(--green); }
+  }
+
+  &__actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  &__btn-clear-all {
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 8px 18px;
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--border-base);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+
+    &:hover { color: var(--color-error); border-color: var(--color-error-border); }
+  }
+
+  &__btn-convert-all {
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 8px 20px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background 0.15s;
+
+    &:hover { background: var(--accent-hover); }
+  }
+
+  &__btn-download-all {
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 8px 20px;
+    background: transparent;
+    color: var(--green);
+    border: 1px solid var(--border-green);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+
+    &:disabled { opacity: 0.35; cursor: default; }
+  }
+}

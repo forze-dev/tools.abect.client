@@ -1,0 +1,24 @@
+.Layout {
+  display: grid;
+  grid-template-rows: var(--header-height) 1fr;
+  grid-template-columns: var(--sidebar-width) 1fr;
+  height: 100vh;
+
+  &__content {
+    grid-column: 2;
+    grid-row: 2;
+    background: var(--bg-content);
+    overflow-y: auto;
+    padding: 28px 32px;
+  }
+
+  @media (max-width: 767px) {
+    grid-template-rows: var(--header-height-mobile) 1fr;
+    grid-template-columns: 1fr;
+
+    &__content {
+      grid-column: 1;
+      padding: 20px 16px;
+    }
+  }
+}

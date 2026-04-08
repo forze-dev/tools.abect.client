@@ -1,0 +1,79 @@
+import { formatSize } from '../../utils/formatSize'
+import FileRow from '../FileRow/FileRow'
+import './FileTable.scss'
+
+export default function FileTable({ files, onQualityChange, onConvert, onConvertAll, onDownload, onDownloadAll, onDelete, onClearAll }) {
+  const doneFiles = files.filter(f => f.status === 'done')
+  const totalSize = files.reduce((sum, f) => sum + f.originalSize, 0)
+  const compressedSize = doneFiles.reduce((sum, f) => sum + (f.resultSize ?? 0), 0)
+  const savedBytes = doneFiles.reduce((sum, f) => sum + (f.originalSize - (f.resultSize ?? f.originalSize)), 0)
+  const hasConverted = doneFiles.length > 0
+
+  return (
+    <div className="FileTable">
+      <div className="FileTable__head">
+        <div className="FileTable__th"></div>
+        <div className="FileTable__th">File</div>
+        <div className="FileTable__th">Quality</div>
+        <div className="FileTable__th">Status</div>
+        <div className="FileTable__th">Convert</div>
+        <div className="FileTable__th"></div>
+      </div>
+
+      {files.map(file => (
+        <FileRow
+          key={file.id}
+          file={file}
+          onQualityChange={onQualityChange}
+          onConvert={onConvert}
+          onDownload={onDownload}
+          onDelete={onDelete}
+        />
+      ))}
+
+      <div className="FileTable__footer">
+        <div className="FileTable__stats">
+          <div className="FileTable__stat">
+            <span className="FileTable__stat-label">Files</span>
+            <span className="FileTable__stat-value">{files.length}</span>
+          </div>
+          <div className="FileTable__stat">
+            <span className="FileTable__stat-label">Converted</span>
+            <span className="FileTable__stat-value">{doneFiles.length} / {files.length}</span>
+          </div>
+          <div className="FileTable__stat">
+            <span className="FileTable__stat-label">Total size</span>
+            <span className="FileTable__stat-value">{formatSize(totalSize)}</span>
+          </div>
+          <div className="FileTable__stat">
+            <span className="FileTable__stat-label">Compressed</span>
+            <span className="FileTable__stat-value">
+              {compressedSize > 0 ? formatSize(compressedSize) : '—'}
+            </span>
+          </div>
+          <div className="FileTable__stat">
+            <span className="FileTable__stat-label">Saved</span>
+            <span className={`FileTable__stat-value${savedBytes > 0 ? ' FileTable__stat-value--green' : ''}`}>
+              {savedBytes > 0 ? formatSize(savedBytes) : '—'}
+            </span>
+          </div>
+        </div>
+        <div className="FileTable__actions">
+          <button className="FileTable__btn-clear-all" onClick={onClearAll}>
+            Clear all
+          </button>
+          <button className="FileTable__btn-convert-all" onClick={onConvertAll}>
+            Convert all
+          </button>
+          <button
+            className="FileTable__btn-download-all"
+            onClick={onDownloadAll}
+            disabled={!hasConverted}
+          >
+            Download all .zip
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
