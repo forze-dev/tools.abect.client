@@ -3,6 +3,12 @@ import './Sidebar.scss'
 
 const NAV_SECTIONS = [
   {
+    label: 'General',
+    items: [
+      { name: 'All tools', route: '/', ready: true },
+    ],
+  },
+  {
     label: 'Images',
     items: [
       { name: 'WebP converter', route: '/webp-converter', ready: true },
@@ -15,8 +21,8 @@ export default function Sidebar({ isOpen, onClose }) {
     <>
       {isOpen && <div className="Sidebar__backdrop" onClick={onClose} />}
       <aside className={`Sidebar${isOpen ? ' Sidebar--open' : ''}`}>
-        <button className="Sidebar__close" onClick={onClose} aria-label="Close menu">✕</button>
-        <nav>
+        <button className="Sidebar__close" onClick={onClose} aria-label="Close menu">x</button>
+        <nav className="Sidebar__nav">
           {NAV_SECTIONS.map(section => (
             <div key={section.label}>
               <div className="Sidebar__section-label">{section.label}</div>
@@ -41,6 +47,17 @@ export default function Sidebar({ isOpen, onClose }) {
             </div>
           ))}
         </nav>
+        <footer className="Sidebar__footer">
+          <NavLink
+            to="/privacy-policy"
+            className={({ isActive }) =>
+              `Sidebar__footer-link${isActive ? ' Sidebar__footer-link--active' : ''}`
+            }
+            onClick={onClose}
+          >
+            Privacy Policy
+          </NavLink>
+        </footer>
       </aside>
     </>
   )

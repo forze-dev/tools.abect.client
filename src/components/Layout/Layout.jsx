@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
+import CookieConsent from '../CookieConsent/CookieConsent'
 import Header from '../Header/Header'
 import Sidebar from '../Sidebar/Sidebar'
 import './Layout.scss'
@@ -19,6 +20,7 @@ export default function Layout() {
       <div className="Layout__content">
         <Outlet />
       </div>
+      <CookieConsent />
     </div>
   )
 }

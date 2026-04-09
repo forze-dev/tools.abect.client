@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom'
 import Layout from './components/Layout/Layout'
 import ComingSoon from './components/ComingSoon/ComingSoon'
 import Home from './pages/Home'
+import PrivacyPolicy from './pages/PrivacyPolicy'
 import WebPConverter from './pages/WebPConverter/WebPConverter'
 
 export default function App() {
@@ -9,6 +10,7 @@ export default function App() {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
+        <Route path="privacy-policy" element={<PrivacyPolicy />} />
         <Route path="webp-converter" element={<WebPConverter />} />
         <Route path="*" element={<ComingSoon />} />
       </Route>
